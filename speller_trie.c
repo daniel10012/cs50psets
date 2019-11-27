@@ -13,6 +13,9 @@
 #define N 27
 unsigned int words = 0;
 
+// Prototype for index function
+unsigned int index(char c);
+
 // Represents a node in a trie
 typedef struct node
 {
@@ -60,24 +63,37 @@ bool load(const char *dictionary)
         node *cursor = root;
         for (int i = 0, l = strlen(word); i < l; i++)
         {
-            unsigned int n = tolower(word[i]) - 'a';
+            unsigned int n = index(word[i]);
 
-
-            node *new_node = cursor->children[n];
-            if (new_node == NULL)
+            node *next_node = cursor->children[n];
+            if (next_node == NULL)
             {
-                 new_node = (node*) malloc(sizeof(node));
-                 memset(new_node, 0, sizeof(node));
-                 cursor->children[n] = new_node;
+                 next_node = malloc(sizeof(node));
+                 if (next_node == NULL)
+                 {
+                     return false;
+                 }
+                 next_node->is_word = false;
+                 for (int j = 0; j < N; j++)
+                 {
+                     next_node->children[j] = NULL;
+                 }
+                 cursor->children[n] = next_node;
+                 if (i == l - 1)
+                 {
+                     cursor->is_word = true;
+                 }
+                 cursor = next_node;
             }
             else
             {
+                if (i == l - 1)
+                {
+                    cursor->is_word = true;
+                }
                 cursor = cursor->children[n];
             }
-            if (i == l - 1)
-            {
-                cursor->is_word = true;
-            }
+
 
 
         }
@@ -103,7 +119,7 @@ bool check(const char *word)
 
     for (int i = 0, l = strlen(word); i < l; i++)
     {
-        unsigned int n = tolower(word[i]) - 'a';
+        unsigned int n = index(word[i]);
 
         if (cursor->children[n] == NULL)
         {
@@ -147,5 +163,21 @@ void clear(node *ptr)
     free(ptr);
 }
 
-
-
+// Function to get the index of a letter or '\''
+unsigned int index(char c)
+    {
+        unsigned int n;
+        if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
+        {
+            n = tolower(c) - 'a';
+        }
+        else if (c == '\'')
+        {
+            n = 26;
+        }
+        else
+        {
+            n = 1000;
+        }
+        return n;
+    }
