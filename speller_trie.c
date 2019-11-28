@@ -6,6 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
+
 #include "dictionary.h"
 
 
@@ -79,19 +80,20 @@ bool load(const char *dictionary)
                      next_node->children[j] = NULL;
                  }
                  cursor->children[n] = next_node;
+                 cursor = next_node;
                  if (i == l - 1)
                  {
                      cursor->is_word = true;
                  }
-                 cursor = next_node;
             }
             else
             {
+
+                cursor = cursor->children[n];
                 if (i == l - 1)
                 {
                     cursor->is_word = true;
                 }
-                cursor = cursor->children[n];
             }
 
 
@@ -126,6 +128,8 @@ bool check(const char *word)
             return false;
         }
 
+        cursor = cursor->children[n];
+
         if (i == l - 1)
         {
             if (cursor->is_word == true)
@@ -137,7 +141,6 @@ bool check(const char *word)
                 return false;
             }
         }
-        cursor = cursor->children[n];
     }
     return false;
 }
