@@ -36,6 +36,6 @@ def main():
     print(f"ciphertext: {ciphertext}")
     sys.exit(0)
 
-# Run the main function
+# Run the main functio
 if __name__ == "__main__":
     main()
