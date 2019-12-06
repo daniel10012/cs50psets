@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e164294-6b53-4f11-be64-8ee6be541a4b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CS50_labs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS50_labs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mariomore.c" beforeDir="false" afterPath="$PROJECT_DIR$/mariomore.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
